@@ -5,8 +5,6 @@ public class ParkingLot {
 
     private Integer remainingSpaceCount;
 
-    public ParkingLot() {
-    }
 
     public ParkingLot(Integer spaceCount, Integer remainingSpaceCount) {
         this.spaceCount = spaceCount;
