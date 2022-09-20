@@ -8,7 +8,7 @@ When 申请停车
 
 Then 获得车票，停车成功
 
-should_get_ticket_and_park_successfully_when_apply_for_parking_given_valid_car_and_remaining_parking_spaces_in_parking_lot
+should_get_ticket_when_parking_car_given_valid_car_and_remaining_parking_spaces_in_parking_lot
 
 
 
@@ -18,23 +18,23 @@ given 小车，停车场无车位
 
 when 申请停车
 
-then 拒绝停车，停车失败
+then 提示没有剩余车位，停车失败
 
-should_refuse_to_park_when_apply_for_parking_given_valid_car_and_no_space_in_parking_lot
-
-
+should_throw_exception_when_parking_car_given_valid_car_and_no_space_in_parking_lot
 
 
 
-Task3 停车-不符合停车场规则的车辆（暂停）
 
-Given 不符合停车场规则的车辆
+
+Task3 停车-没有车辆
+
+Given 没有车辆
 
 When 申请停车
 
-Then 拒绝停车，停车失败
+Then 提示没有车辆，停车失败
 
-should_refuse_to_park_when_apply_for_parking_given_invalid_car
+should_throw_exception_when_parking_car_given_no_car
 
 
 
@@ -46,9 +46,9 @@ Given 有车票，停车场有对应车辆
 
 When 申请取车
 
-Then 获得小车，取车成功，车票失效
+Then 获得小车，取车成功
 
-should_get_the_car_and_ticket_become_invalid_when_apply_for_picking_up_given_valid_ticket_and_the_car_in_the_parking_lot
+should_get_the_car_when_pick_up_car_given_valid_ticket_and_the_car_in_the_parking_lot
 
 
 
@@ -58,18 +58,18 @@ given 无车票
 
 When 申请取车
 
-Then 拒绝取车，取车失败
+Then 提示没有车票，取车失败
 
-should_refuse_to_pick_up_when_apply_for_picking_up_given_no_ticket
+should_throw_exception_when_pick_up_car_given_no_ticket
 
 
 
-Task6 取车-无效车票（伪造车票、过期车票）
+Task6 取车-无效车票
 
-Given 有无效车票
+Given 有车票，但车票对应的车不在停车场
 
 When 申请取车
 
-Then 提示车票错误，取车失败
+Then 提示没有对应车辆，取车失败
 
-should_refuse_to_pick_up_when_apply_for_picking_up_given_invalid_ticket
+should_throw_exception_when_pick_up_car_given_invalid_ticket_and_the_car_not_in_the_parking_lot
