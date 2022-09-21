@@ -3,14 +3,14 @@ package com.example.AEPB.entity;
 public class Ticket {
     private String id;
 
-    private String carId;
+    private Integer parkingLotId;
 
-    private Boolean enabled;
+    private String carPlateNumber;
 
-    public Ticket(String id, String carId, Boolean enabled) {
+    public Ticket(String id, Integer parkingLotId, String carPlateNumber) {
         this.id = id;
-        this.carId = carId;
-        this.enabled = enabled;
+        this.parkingLotId = parkingLotId;
+        this.carPlateNumber = carPlateNumber;
     }
 
     public String getId() {
@@ -21,19 +21,20 @@ public class Ticket {
         this.id = id;
     }
 
-    public String getCarId() {
-        return carId;
+    public Integer getParkingLotId() {
+        return parkingLotId;
     }
 
-    public void setCarId(String carId) {
-        this.carId = carId;
+    public void setParkingLotId(Integer parkingLotId) {
+        this.parkingLotId = parkingLotId;
     }
 
-    public Boolean getEnabled() {
-        return enabled;
+    public String getCarPlateNumber() {
+        return carPlateNumber;
     }
 
-    public void setEnabled(Boolean enabled) {
-        this.enabled = enabled;
+    public void setCarPlateNumber(String carPlateNumber) {
+        this.carPlateNumber = carPlateNumber;
     }
+
 }
