@@ -1,5 +1,5 @@
 Tasking
-
+## v1
 Task1 停车-有车位
 
 Given 小车，停车场有车位
@@ -69,3 +69,74 @@ When 申请取车
 Then 提示没有车票，取车失败
 
 should_throw_exception_when_pick_up_car_given_no_ticket
+
+## v2
+Task1 停车-有车位
+
+Given 小车，停车场有车位
+
+When 小弟代客停车
+
+Then 获得车票，停车成功
+
+should_get_ticket_when_valet_parking_car_given_valid_car_and_remaining_parking_spaces_in_parking_lot
+
+
+
+task2 停车-无车位
+
+given 小车，停车场无车位
+
+when 小弟代客停车
+
+then 返回空，停车失败
+
+should_return_null_when_valet_parking_car_given_valid_car_and_no_space_in_parking_lot
+
+
+
+Task3 停车-没有车辆
+
+Given 没有车辆
+
+When 小弟代客停车
+
+Then 提示没有车辆，停车失败
+
+should_throw_exception_when_valet_parking_car_given_no_car
+
+
+
+Task4 取车-有车票
+
+Given 有车票，停车场有对应车辆
+
+When 小弟代客取车
+
+Then 获得小车，取车成功
+
+should_get_the_car_when_valet_pick_up_car_given_valid_ticket_and_the_car_in_the_parking_lot
+
+
+
+Task5 取车-无效车票
+
+Given 有车票，但车票对应的车不在停车场
+
+When 小弟代客取车
+
+Then 返回空，取车失败
+
+should_return_null_when_valet_pick_up_car_given_valid_ticket_and_the_car_not_in_the_parking_lot
+
+
+
+Task6 取车-无车票
+
+given 无车票
+
+When 小弟代客取车
+
+Then 提示没有车票，取车失败
+
+should_throw_exception_when_valet_pick_up_car_given_no_ticket
