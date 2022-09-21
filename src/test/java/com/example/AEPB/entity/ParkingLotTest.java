@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class ParkingLotTest {
@@ -21,14 +22,14 @@ class ParkingLotTest {
     }
 
     @Test
-    void should_throw_exception_when_parking_car_given_valid_car_and_no_space_in_parking_lot() {
+    void should_return_null_when_parking_car_given_valid_car_and_no_space_in_parking_lot() {
         // given
         Car car = new Car();
         ParkingLot parkingLot = new ParkingLot(0);
         // when
-        RuntimeException result = assertThrows(RuntimeException.class, () -> parkingLot.parkingCar(car));
+        Ticket ticket = parkingLot.parkingCar(car);
         // then
-        assertEquals("没有剩余车位，停车失败", result.getMessage());
+        assertNull(ticket);
     }
 
     @Test
@@ -55,6 +56,18 @@ class ParkingLotTest {
     }
 
     @Test
+    void should_return_null_when_pick_up_car_given_valid_ticket_and_the_car_not_in_the_parking_lot() {
+        // given
+        ParkingLot parkingLot = new ParkingLot(1);
+        Car existedCar = new Car();
+        parkingLot.parkingCar(existedCar);
+        // when
+        Car car = parkingLot.pickUpCar(new Ticket());
+        // then
+        assertNull(car);
+    }
+
+    @Test
     void should_throw_exception_when_pick_up_car_given_no_ticket() {
         // given
         ParkingLot parkingLot = new ParkingLot(1);
@@ -64,17 +77,5 @@ class ParkingLotTest {
         RuntimeException result = assertThrows(RuntimeException.class, () -> parkingLot.pickUpCar(null));
         // then
         assertEquals("没有车票，取车失败", result.getMessage());
-    }
-
-    @Test
-    void should_throw_exception_when_pick_up_car_given_invalid_ticket_and_the_car_not_in_the_parking_lot() {
-        // given
-        ParkingLot parkingLot = new ParkingLot(1);
-        Car existedCar = new Car();
-        parkingLot.parkingCar(existedCar);
-        // when
-        RuntimeException result = assertThrows(RuntimeException.class, () -> parkingLot.pickUpCar(new Ticket()));
-        // then
-        assertEquals("没有对应车辆，取车失败", result.getMessage());
     }
 }

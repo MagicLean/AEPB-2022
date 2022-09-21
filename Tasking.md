@@ -18,11 +18,9 @@ given 小车，停车场无车位
 
 when 申请停车
 
-then 提示没有剩余车位，停车失败
+then 返回空，停车失败
 
-should_throw_exception_when_parking_car_given_valid_car_and_no_space_in_parking_lot
-
-
+should_return_null_when_parking_car_given_valid_car_and_no_space_in_parking_lot
 
 
 
@@ -38,8 +36,6 @@ should_throw_exception_when_parking_car_given_no_car
 
 
 
-
-
 Task4 取车-有车票
 
 Given 有车票，停车场有对应车辆
@@ -52,7 +48,19 @@ should_get_the_car_when_pick_up_car_given_valid_ticket_and_the_car_in_the_parkin
 
 
 
-Task5 取车-无车票
+Task5 取车-无效车票
+
+Given 有车票，但车票对应的车不在停车场
+
+When 申请取车
+
+Then 返回空，取车失败
+
+should_return_null_when_pick_up_car_given_valid_ticket_and_the_car_not_in_the_parking_lot
+
+
+
+Task6 取车-无车票
 
 given 无车票
 
@@ -61,15 +69,3 @@ When 申请取车
 Then 提示没有车票，取车失败
 
 should_throw_exception_when_pick_up_car_given_no_ticket
-
-
-
-Task6 取车-无效车票
-
-Given 有车票，但车票对应的车不在停车场
-
-When 申请取车
-
-Then 提示没有对应车辆，取车失败
-
-should_throw_exception_when_pick_up_car_given_invalid_ticket_and_the_car_not_in_the_parking_lot

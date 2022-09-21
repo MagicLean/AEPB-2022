@@ -1,6 +1,7 @@
 package com.example.AEPB.entity;
 
 import java.util.List;
+import java.util.Objects;
 
 public class GraduateParkingBoy {
     private List<ParkingLot> parkingLotList;
@@ -11,24 +12,22 @@ public class GraduateParkingBoy {
 
     Ticket valetParkingCar(Car car) {
         for (ParkingLot parkingLot : parkingLotList) {
-            try {
-                return parkingLot.parkingCar(car);
-            } catch (Exception e) {
-
+            Ticket ticket = parkingLot.parkingCar(car);
+            if (Objects.nonNull(ticket)) {
+                return ticket;
             }
         }
-        throw new RuntimeException("停车失败");
+        return null;
     }
 
     Car valetPickUpCar(Ticket ticket) {
         for (ParkingLot parkingLot : parkingLotList) {
-            try {
-                parkingLot.pickUpCar(ticket);
-            } catch (Exception e) {
-
+            Car car = parkingLot.pickUpCar(ticket);
+            if (Objects.nonNull(car)) {
+                return car;
             }
         }
-        throw new RuntimeException("取车失败");
+        return null;
     }
 
 }

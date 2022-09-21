@@ -24,7 +24,7 @@ public class ParkingLot {
         }
         // 判断车位是否有剩余
         if (getRemainingSpaceCount() <= 0) {
-            throw new RuntimeException("没有剩余车位，停车失败");
+            return null;
         }
         // 生成ticket，并记录车票和车辆信息
         Ticket newTicket = new Ticket();
@@ -38,7 +38,7 @@ public class ParkingLot {
         }
         Car car = ticketToCarMap.get(ticket);
         if (Objects.isNull(car)) {
-            throw new RuntimeException("没有对应车辆，取车失败");
+            return null;
         }
         ticketToCarMap.remove(ticket);
         return car;
