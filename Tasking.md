@@ -1,5 +1,6 @@
 Tasking
 
+## v1
 Task1 停车-有车位
 
 Given 小车，停车场有车位
@@ -73,3 +74,34 @@ When 申请取车
 Then 提示车票错误，取车失败
 
 should_refuse_to_pick_up_when_apply_for_picking_up_given_invalid_ticket
+
+## v2
+作为一个初入职场的停车小弟
+顺序停放多个停车场
+可以取出
+
+Tasking1 - 小弟顺序停车
+given 小车，停车场1有位置
+when 小弟去停车
+then 车辆停入停车场1，获得车票
+
+Tasking2 - 小弟顺序停车
+given  小车，停车场1停满，停车场2有位置
+when 小弟去停车
+then 车辆停入停车场2，获得车票
+
+
+Tasking3 - 小弟顺序停车
+given  小车，停车场1停满，停车场2停满
+when 小弟去停车
+then 提示没有剩余车位，停车失败
+
+Tasking4 - 小弟取车
+Given  有车票，停车场1有对应车辆
+When 小弟去取车
+Then 获得小车
+
+Tasking5 - 小弟取车
+Given  有车票，停车场1没有对应车辆，停车场2也没有对应车辆
+When 小弟去取车
+Then 提示没有车辆，取车失败
