@@ -24,7 +24,7 @@ class ParkingLotTest {
     }
 
     @Test
-    void should_failed_to_park_when_parking_car_given_valid_car_and_no_space_in_parking_lot() {
+    void should_park_failed_when_parking_car_given_valid_car_and_no_space_in_parking_lot() {
         // given
         ParkingLot parkingLot = new ParkingLot(1, 0);
         Car car = new Car("京A12345");
@@ -35,7 +35,7 @@ class ParkingLotTest {
     }
 
     @Test
-    void should_failed_to_park_when_parking_car_given_invalid_car() {
+    void should_park_failed_when_parking_car_given_no_car() {
         // given
         ParkingLot parkingLot = new ParkingLot(1, 1);
         // when
@@ -45,7 +45,7 @@ class ParkingLotTest {
     }
 
     @Test
-    void should_get_the_car_when_pick_up_car_given_valid_ticket_and_the_car_in_the_parking_lot() {
+    void should_pick_up_successfully_when_pick_up_car_given_valid_ticket_and_the_car_in_the_parking_lot() {
         // given
         ParkingLot parkingLot = new ParkingLot(1, 1);
         Car car = new Car("京A12345");
@@ -60,7 +60,7 @@ class ParkingLotTest {
     }
 
     @Test
-    void should_failed_to_pick_up_when_pick_up_car_given_no_ticket() {
+    void should_pick_up_failed_when_pick_up_car_given_no_ticket() {
         // given
         ParkingLot parkingLot = new ParkingLot(1, 1);
         Car car = new Car("京A12345");

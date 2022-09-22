@@ -8,38 +8,46 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class GraduateParkingBoy {
-    private List<Integer> parkingLotIdList;
 
-    List<ParkingLot> init() {
-        ParkingLot parkingLot = new ParkingLot(1, 10);
-        ParkingLot parkingLot2 = new ParkingLot(2, 12);
-        parkingLotIdList = List.of(1, 2);
-        return List.of(parkingLot, parkingLot2);
+    private List<ParkingLot> parkingLotList;
+
+    public GraduateParkingBoy() {
+        init();
+    }
+
+    void init() {
+        ParkingLot parkingLot = new ParkingLot(1, 1);
+        ParkingLot parkingLot2 = new ParkingLot(2, 1);
+        this.parkingLotList = List.of(parkingLot, parkingLot2);
+    }
+
+    public List<ParkingLot> getParkingLotList() {
+        return parkingLotList;
     }
 
     Ticket valetParkingCar(Car car) {
-        List<ParkingLot> parkingLotList = init();
-        Map<Integer, ParkingLot> idToParkingLotMap = parkingLotList.stream().collect(Collectors.toMap(ParkingLot::getId, Function.identity()));
-        for (Integer parkingLotId : parkingLotIdList) {
+        if (Objects.isNull(car)) {
+            throw new RuntimeException("没有车辆，停车失败");
+        }
+        for (ParkingLot parkingLot : this.parkingLotList) {
             try {
-                ParkingLot parkingLot = idToParkingLotMap.get(parkingLotId);
                 return parkingLot.parkingCar(car);
             } catch (Exception e) {
                 // todo: log
             }
         }
-        throw new RuntimeException("停车失败");
+        throw new RuntimeException("没有剩余车位，停车失败");
     }
 
     Car valetPickUpCar(Ticket ticket) {
-        List<ParkingLot> parkingLotList = init();
-        Map<Integer, ParkingLot> idToParkingLotMap = parkingLotList.stream().collect(Collectors.toMap(ParkingLot::getId, Function.identity()));
-        Optional<Integer> idOptional = parkingLotIdList.stream().filter(parkingLotId -> parkingLotId.equals(ticket.getParkingLotId())).findFirst();
-        if (idOptional.isEmpty()) {
-            throw new RuntimeException("取车失败");
+        if (Objects.isNull(ticket)) {
+            throw new RuntimeException("没有车票，取车失败");
         }
-        Integer parkingLotId = idOptional.get();
-        ParkingLot parkingLot = idToParkingLotMap.get(parkingLotId);
+        Optional<ParkingLot> parkingLotOptional = parkingLotList.stream().filter(p -> p.getId().equals(ticket.getParkingLotId())).findFirst();
+        if (parkingLotOptional.isEmpty()) {
+            throw new RuntimeException("车票无效，取车失败");
+        }
+        ParkingLot parkingLot = parkingLotOptional.get();
         return parkingLot.pickUpCar(ticket);
     }
 }
