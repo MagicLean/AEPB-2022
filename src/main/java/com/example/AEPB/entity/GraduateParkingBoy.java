@@ -1,11 +1,8 @@
 package com.example.AEPB.entity;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
 public class GraduateParkingBoy {
 
@@ -13,6 +10,10 @@ public class GraduateParkingBoy {
 
     public GraduateParkingBoy() {
         init();
+    }
+
+    public GraduateParkingBoy(List<ParkingLot> parkingLotList) {
+        this.parkingLotList = parkingLotList;
     }
 
     void init() {
